@@ -1,0 +1,64 @@
+.AppTitle {
+    font-size: 48px;
+    color: #FFFFFF;
+}
+
+.AddTaskBtn {
+    width: 100%;
+    text-align: center;
+    background-color: forestgreen;
+    color: #FFFFFF;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    font-size: 17px;
+}
+
+.AddTaskBtn :hover {
+    cursor: pointer;
+}
+
+.TodoList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.TodoItems {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0 0;
+    padding: 0;
+    width: 100%;
+}
+
+.TodoItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.TodoItem > span {
+    overflow: hidden;
+    max-width: calc(100% - 70px);
+    text-overflow: ellipsis;
+}
+
+.removeTaskBtn {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+.removeTaskBtn :hover {
+    cursor: pointer;
+}
+
+.removeTaskBtn > img {
+    width: 20px;
+    height: 20px;
+}
