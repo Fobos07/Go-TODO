@@ -2,11 +2,13 @@ import React, {useEffect, useState} from 'react';
 import AddTask from '../AddTask/AddTask'; // Импортируем компонент добавления задачи
 import {deleteTodo, getTodos, updateTodo} from '../../api/todoApi'; // Импортируем API для работы с задачами
 import "./TodoList.css";
+import TaskCard from "../TaskCard/TaskCard";
 
 const TodoList = () => {
     const [todos, setTodos] = useState([]); // Состояние для списка задач
     const [showAddTask, setShowAddTask] = useState(false); // Состояние для отображения формы добавления задачи
     const [error, setError] = useState(null); // Состояние для ошибок
+    const [selectedTodoId, setSelectedTodoId] = useState(null);
 
     // Функция для загрузки задач с API
     const fetchTodos = async () => {
@@ -23,6 +25,10 @@ const TodoList = () => {
     useEffect(() => {
         fetchTodos(); // Загружаем задачи при старте компонента
     }, []);
+
+    const handleGetTodo = (id) => {
+        setSelectedTodoId(id === selectedTodoId ? null : id); // Открываем/закрываем карточку задачи
+    };
 
     const handleAddTask = () => {
         setShowAddTask(false); // Скрываем компонент добавления задачи
@@ -63,22 +69,25 @@ const TodoList = () => {
 
             <ul className={"TodoItems"}>
                 {todos && todos.length > 0 ? (
-                    todos.map(todo => (
-                        !todo.done && ( // Проверяем, что задача не завершена
-                            <li className={"TodoItem"} key={todo.id}>
-                <span style={{textDecoration: todo.done ? 'line-through' : 'none'}}>
-                    {todo.title}
-                </span>
-                                <div>
-                                    <button className={"removeTaskBtn"} onClick={() => handleUpdateTodo(todo.id)}>
-                                        <img src="done-icon.svg" alt="Mark as done"/>
-                                    </button>
-                                    <button className={"removeTaskBtn"} onClick={() => handleDeleteTodo(todo.id)}>
-                                        <img src="trash-icon.svg" alt="Delete task"/>
-                                    </button>
-                                </div>
-                            </li>
-                        )
+                    todos.map(todo => !todo.done && (
+                        <li className={"TodoItem"} key={todo.id}>
+                            <span
+                                style={{ textDecoration: todo.done ? 'line-through' : 'none' }}
+                                onClick={() => handleGetTodo(todo.id)}
+                            >
+                                {todo.title}
+                            </span>
+                            <div>
+                                <button className={"removeTaskBtn"} onClick={() => handleUpdateTodo(todo.id)}>
+                                    <img src="done-icon.svg" alt="Mark as done"/>
+                                </button>
+                                <button className={"removeTaskBtn"} onClick={() => handleDeleteTodo(todo.id)}>
+                                    <img src="trash-icon.svg" alt="Delete task"/>
+                                </button>
+                            </div>
+                            {/* Показываем карточку задачи при клике */}
+                            {selectedTodoId === todo.id && <TaskCard id={todo.id} />}
+                        </li>
                     ))
                 ) : (
                     <p>No tasks available</p> // Если задач нет, выводим сообщение

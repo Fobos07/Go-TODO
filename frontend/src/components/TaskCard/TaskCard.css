@@ -1,0 +1,22 @@
+.TaskCard {
+    max-width: 360px;
+    max-height: 400px;
+    height: 100%;
+    width: 100%;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: calc(50% - 200px);
+    left: calc(50% - 180px);
+    color: #212121;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.TaskTitle {
+
+}
+
+.TaskCard > p, h3 {
+    max-width: calc(100% - 40px);
+    hyphens: auto;
+}

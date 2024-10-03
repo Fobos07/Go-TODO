@@ -17,3 +17,7 @@ export const updateTodo = async (todo) => {
 export const deleteTodo = async (id) => {
     return await axios.delete(`${API_URL}/todos/delete`, { params: { id } });
 };
+
+export const getTodo = async (id) => {
+    return await axios.get(`${API_URL}/todos/get`, { params: { id } })
+}
